@@ -1,0 +1,25 @@
+{
+  "name": "test-task-from-hrp-consulting",
+  "version": "1.0.0",
+  "description": "Animated card deck on pixi.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lyashka/test-task-from-HRP-consulting.git"
+  },
+  "author": "Lyashka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lyashka/test-task-from-HRP-consulting/issues"
+  },
+  "homepage": "https://github.com/Lyashka/test-task-from-HRP-consulting#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4",
+    "pixi.js": "^5.3.3"
+  }
+}
