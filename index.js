@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js';
-import card from './img/test-card.png';
 
 const app = new PIXI.Application({
   width: window.innerWidth,
@@ -10,12 +9,10 @@ const app = new PIXI.Application({
 app.renderer.view.style.display = "block";
 document.body.appendChild(app.view);
 
-app.loader
-.add("card", card)
-.load((loader, resources) => {
-  const card = new PIXI.Sprite(resources.card.texture);
-  card.anchor.set(0.5);
-  card.x = app.screen.width / 2;
-  card.y = app.screen.height / 2;
-  app.stage.addChild(card);
-})
+const graphics = new PIXI.Graphics();
+graphics.lineStyle(2, 0xFFFFFF, 1);
+graphics.drawRect(500, app.screen.height / 3 - 6, 90, 130);
+graphics.drawRect(650, app.screen.height / 3 - 6, 90, 130);
+graphics.drawRect(800, app.screen.height / 3 - 6, 90, 130);
+graphics.drawRect(950, app.screen.height / 3 - 6, 90, 130);
+app.stage.addChild(graphics);
