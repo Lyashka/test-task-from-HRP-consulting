@@ -1,5 +1,8 @@
 import * as PIXI from 'pixi.js';
 import pathToSprite from './img/cards.gif';
+import { cardsArray } from './localStorage.js';
+import { getRandomInt } from './common/getRandomInt.js';
+import { cloneDeep } from './common/cloneDeep.js';
 
 const app = new PIXI.Application({
   width: window.innerWidth,
@@ -21,26 +24,36 @@ app.stage.addChild(graphics);
 app.loader
 .add("cards", pathToSprite)
 .load((loader, resources) => {
-  const faceTexture = new PIXI.Texture(resources.cards.texture);
   const backTexture = new PIXI.Texture(resources.cards.texture);
-  const faceRectangle = new PIXI.Rectangle(809, 352, 82, 118);
   const backRectangle = new PIXI.Rectangle(0, 469, 82, 118);
-  faceTexture.frame = faceRectangle;
   backTexture.frame = backRectangle;
-  const card = new PIXI.Sprite(faceTexture);
-  card.x = app.screen.width / 4;
-  card.y = app.screen.height / 3;
-  app.stage.addChild(card);
+  const deck = new PIXI.Sprite(backTexture);
+  deck.x = app.screen.width / 4;
+  deck.y = app.screen.height / 3;
+  app.stage.addChild(deck);
 
-  let bol = false;
-  card.interactive = true;
-  card.buttonMode = true;
-  card.on('pointertap', () => {
-    bol = !bol;
-    if (bol) {
-      card.texture = faceTexture;
+  let currentCardsArray = cloneDeep(cardsArray);
+  let isBackCard = true;
+  deck.interactive = true;
+  deck.buttonMode = true;
+  deck.on('pointertap', () => {
+    if (isBackCard) {
+      isBackCard = !isBackCard;
+      const randomIndex = getRandomInt(0, currentCardsArray.length - 1);
+      const randomCard = currentCardsArray[randomIndex];
+      currentCardsArray = currentCardsArray.filter((card, index) => index !== randomIndex);
+      const faceTexture = new PIXI.Texture(resources.cards.texture);
+      const faceRectangle = new PIXI.Rectangle(randomCard.xStart, randomCard.yStart, 82, 118);
+      faceTexture.frame = faceRectangle;
+      deck.texture = faceTexture;
+      console.log(faceTexture);
     } else {
-      card.texture = backTexture;
+      if (currentCardsArray.length !== 0) {
+        isBackCard = !isBackCard;
+        deck.texture = backTexture;
+      } else {
+        deck.visible = false;
+      }
     }
   })
   app.renderer.render(app.stage);
