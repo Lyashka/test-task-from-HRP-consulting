@@ -1,3 +1,3 @@
-import Game from "./renderGame.js";
+import { Game } from "./renderGame.js";
 
 window.game = new Game();
