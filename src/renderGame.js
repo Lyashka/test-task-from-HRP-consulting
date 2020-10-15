@@ -49,4 +49,31 @@ export class Game {
     this.deck.buttonMode = true;
     this.app.stage.addChild(this.deck);
   }
+
+  play() {
+    this.deck.on('pointertap', () => {
+      const randomIndex = getRandomInt(0, this.currentCardsArray.length - 1);
+      const randomCard = this.currentCardsArray[randomIndex];
+      this.currentCardsArray = this.currentCardsArray.filter((card, index) => index !== randomIndex);
+      const faceTexture = new PIXI.Texture(resources.cards.texture);
+      const faceFrame = new PIXI.Rectangle(randomCard.xStart, randomCard.yStart, CARD_WIDTH, CARD_HEIGHT);
+      faceTexture.frame = faceFrame;
+
+      const newCard = new PIXI.Sprite(backTexture);
+      newCard.x = this.widthApp / 4;
+      newCard.y = this.heightApp / 3;
+      const lastPointBySuit = setLastPointBySuit(randomCard.suit);
+      this.app.ticker.add((delta) => {
+        if (newCard.x < lastPointBySuit) {
+          newCard.x += 3 * delta;
+        }
+        setTimeout(() => newCard.texture = faceTexture, 1000);
+      });
+      this.app.stage.addChild(newCard);
+      if (currentCardsArray.length === 0) {
+        this.deck.visible = false;
+      }
+    })
+    this.app.renderer.render(this.app.stage);
+  }
 }
