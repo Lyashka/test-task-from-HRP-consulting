@@ -1,4 +1,35 @@
-export const cardsArray = [
+export const BACKGROUND_COLOR = 0x00B060;
+
+export const CARD_WIDTH = 82;
+export const CARD_HEIGHT = 118;
+
+const SUIT_AREAS_WIDTH = 94;
+const SUIT_AREAS_HEIGHT = 130;
+export const SUIT_AREAS_LINE_COLOR = 0xFFFFFF;
+export const SUIT_AREAS = [
+  {
+    xStart: 600,
+    width: SUIT_AREAS_WIDTH,
+    height: SUIT_AREAS_HEIGHT,
+  },
+  {
+    xStart: 750,
+    width: SUIT_AREAS_WIDTH,
+    height: SUIT_AREAS_HEIGHT,
+  },
+  {
+    xStart: 900,
+    width: SUIT_AREAS_WIDTH,
+    height: SUIT_AREAS_HEIGHT,
+  },
+  {
+    xStart: 1050,
+    width: SUIT_AREAS_WIDTH,
+    height: SUIT_AREAS_HEIGHT,
+  }
+];
+
+export const CARDS_ARRAY = [
   {//6
     suit: 'hearts',
     xStart: 324,
