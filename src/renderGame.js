@@ -28,4 +28,25 @@ export class Game {
       .load(() => this.initGame());
     this.play();
   }
+
+  initGame() {
+    this.app.renderer.view.style.display = "block";
+    document.body.appendChild(this.app.view);
+
+    const suitsAreas = new PIXI.Graphics();
+    suitsAreas.lineStyle(2, SUIT_AREAS_LINE_COLOR, 1);
+    SUIT_AREAS.map(item =>
+      suitsAreas.drawRect(item.xStart, this.heightApp / 3 - 6, item.width, item.height));
+    this.app.stage.addChild(suitsAreas);
+
+    const backTexture = new PIXI.Texture(resources.cards.texture);
+    const backFrame = new PIXI.Rectangle(0, 469, CARD_WIDTH, CARD_HEIGHT);
+    backTexture.frame = backFrame;
+    this.deck = new PIXI.Sprite(backTexture);
+    this.deck.x = this.widthApp / 4;
+    this.deck.y = this.heightApp / 3;
+    this.deck.interactive = true;
+    this.deck.buttonMode = true;
+    this.app.stage.addChild(this.deck);
+  }
 }
