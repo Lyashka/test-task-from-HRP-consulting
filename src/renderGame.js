@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import pathToSpriteCards from './img/cards.gif';
+import { Deck } from './Core/entity/Deck.js';
 import { Card } from './Core/entity/Card.js';
 import { getRandomInt } from './common/getRandomInt.js';
 import { getDestinationBySuit } from './Core/getDestinationBySuit.js';
@@ -45,24 +46,23 @@ export class Game {
       suitsAreas.drawRect(item.xStart, this.heightApp / 3 - 6, item.width, item.height));
     this.app.stage.addChild(suitsAreas);
 
-    this.backTexture = new PIXI.Texture(resources.cards.texture);
-    const backFrame = new PIXI.Rectangle(0, 469, CARD_WIDTH, CARD_HEIGHT);
-    this.backTexture.frame = backFrame;
+    this.deck = new Deck({
+      resources: resources,
+      widthFrame: CARD_WIDTH,
+      heightFrame: CARD_HEIGHT,
+      xStartFrame: 0,
+      yStartFrame: 469,
+      xStartDeck: this.widthApp / 4,
+      yStartDeck: this.heightApp / 3,
+    });
 
-    this.deck = new PIXI.Sprite(this.backTexture);
-    this.deck.x = this.widthApp / 4;
-    this.deck.y = this.heightApp / 3;
-    this.deck.interactive = true;
-    this.deck.buttonMode = true;
-
-    this.app.stage.addChild(this.deck);
+    this.app.stage.addChild(this.deck.getDeck());
   }
 
   play(resources) {
-    this.deck.on('pointertap', () => {
+    this.deck.getDeck().on('pointertap', () => {
       const randomIndex = getRandomInt(0, this.currentCardsArray.length - 1);
       this.randomCard = this.currentCardsArray[randomIndex];
-
       this.currentCardsArray = this.currentCardsArray.filter((card, index) => index !== randomIndex);
 
       const newCard = new Card({
@@ -70,12 +70,13 @@ export class Game {
         randomCard: this.randomCard,
         width: CARD_WIDTH,
         height: CARD_HEIGHT,
-        backTexture: this.backTexture,
+        backTexture: this.deck.getTexture(),
         xStart: this.widthApp / 4,
         yStart: this.heightApp / 3,
       },);
 
       const destinationBySuit = getDestinationBySuit(this.randomCard.suit);
+
       this.app.ticker.add((delta) => {
         if (newCard.getCard().x < destinationBySuit) {
           newCard.moveByX(4 * delta);
@@ -86,9 +87,10 @@ export class Game {
 
       this.app.stage.addChild(newCard.getCard());
       if (this.currentCardsArray.length === 0) {
-        this.deck.visible = false;
+        this.deck.hidden();
       }
     })
+
     this.app.renderer.render(this.app.stage);
   }
 }
