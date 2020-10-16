@@ -31,11 +31,11 @@ export class Game {
         this.initGame(resources);
         this.play(resources);
       });
+    document.body.appendChild(this.app.view);
   }
 
   initGame(resources) {
     this.app.renderer.view.style.display = "block";
-    document.body.appendChild(this.app.view);
 
     const suitsAreas = new PIXI.Graphics();
     suitsAreas.lineStyle(2, SUIT_AREAS_LINE_COLOR, 1);
