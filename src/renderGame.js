@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import pathToSpriteCards from './img/cards.gif';
 import { Card } from './Core/entity/Card.js';
 import { getRandomInt } from './common/getRandomInt.js';
-import { setLastPointBySuit } from './Core/setLastPointBySuit.js';
+import { getDestinationBySuit } from './Core/getDestinationBySuit.js';
 import { cloneDeep } from './common/cloneDeep.js';
 
 import {
@@ -75,9 +75,9 @@ export class Game {
         yStart: this.heightApp / 3,
       },);
 
-      const lastPointBySuit = setLastPointBySuit(this.randomCard.suit);
+      const destinationBySuit = getDestinationBySuit(this.randomCard.suit);
       this.app.ticker.add((delta) => {
-        if (newCard.getCard().x < lastPointBySuit) {
+        if (newCard.getCard().x < destinationBySuit) {
           newCard.moveByX(4 * delta);
         }
 
