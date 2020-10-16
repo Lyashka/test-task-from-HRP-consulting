@@ -32,7 +32,6 @@ export class Game {
       .add("cards", pathToSpriteCards)
       .load((loader, resources) => {
         this.initGame(resources);
-        this.play(resources);
       });
     document.body.appendChild(this.app.view);
   }
@@ -57,9 +56,11 @@ export class Game {
     });
 
     this.app.stage.addChild(this.deck.getDeck());
+
+    this.addGameAnimation(resources);
   }
 
-  play(resources) {
+  addGameAnimation(resources) {
     this.deck.getDeck().on('pointertap', () => {
       const randomIndex = getRandomInt(0, this.currentCardsArray.length - 1);
       this.randomCard = this.currentCardsArray[randomIndex];
