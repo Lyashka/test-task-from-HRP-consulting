@@ -13,6 +13,7 @@ import {
   CARD_HEIGHT,
   SUIT_AREAS,
   SUIT_AREAS_LINE_COLOR,
+  CARD_MOVE_SPEED,
 } from './localStorage.js';
 
 export class Game {
@@ -78,10 +79,11 @@ export class Game {
 
       const destinationBySuit = getDestinationBySuit(this.randomCard.suit);
 
-      this.app.ticker.add((delta) => {
-        if (newCard.getCard().x < destinationBySuit) {
-          newCard.moveByX(4 * delta);
-        }
+      this.app.ticker.add(() => {
+        let distanceToDestination = destinationBySuit - newCard.getCard().x;
+        (newCard.getCard().x < destinationBySuit && distanceToDestination > CARD_MOVE_SPEED) ?
+          newCard.moveByX(CARD_MOVE_SPEED) :
+          newCard.moveByX(distanceToDestination);
 
         setTimeout(() => newCard.setFrontTexture(), 1000);
       });

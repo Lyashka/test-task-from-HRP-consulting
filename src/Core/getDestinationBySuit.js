@@ -2,16 +2,16 @@ export function getDestinationBySuit(suit) {
   let destination = null;
   switch (true) {
     case suit === "hearts":
-      destination = 603;
+      destination = 606;
       break;
     case suit === "clubs":
-      destination = 753;
+      destination = 756;
       break;
     case suit === "diamonds":
-      destination = 902;
+      destination = 906;
       break;
     case suit === "spades":
-      destination = 1053;
+      destination = 1056;
       break;
   }
 

@@ -3,6 +3,8 @@ export const BACKGROUND_COLOR = 0x00B060;
 export const CARD_WIDTH = 82;
 export const CARD_HEIGHT = 118;
 
+export const CARD_MOVE_SPEED = 4;
+
 const SUIT_AREAS_WIDTH = 94;
 const SUIT_AREAS_HEIGHT = 130;
 export const SUIT_AREAS_LINE_COLOR = 0xFFFFFF;
@@ -89,12 +91,12 @@ export const CARDS_ARRAY = [
   },
   {//7
     suit: 'diamonds',
-    xStart: 405,
+    xStart: 404,
     yStart: 118,
   },
   {//8
     suit: 'diamonds',
-    xStart: 486,
+    xStart: 485,
     yStart: 118,
   },
   {//9
