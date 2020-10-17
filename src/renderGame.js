@@ -87,7 +87,7 @@ export class Game {
       const destinationBySuit = getDestinationBySuit(this.randomCard.suit);
 
       this.app.ticker.add(() => {
-        let distanceToDestination = destinationBySuit - newCard.getSprite().x;
+        const distanceToDestination = destinationBySuit - newCard.getSprite().x;
         if (newCard.getSprite().x < destinationBySuit && distanceToDestination > CARD_MOVE_SPEED) {
           newCard.moveByX(CARD_MOVE_SPEED);
         } else {
