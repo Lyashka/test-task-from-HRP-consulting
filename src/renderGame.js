@@ -85,7 +85,7 @@ export class Game {
           newCard.moveByX(CARD_MOVE_SPEED) :
           newCard.moveByX(distanceToDestination);
 
-        setTimeout(() => newCard.setFrontTexture(), 1000);
+        setTimeout(() => newCard.turnUp(), 1000);
       });
 
       this.app.stage.addChild(newCard.getCard());

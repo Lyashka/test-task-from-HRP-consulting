@@ -9,7 +9,7 @@ export class Card {
     this.frontTexture.frame = this.frontFrame;
 
     this.card = new PIXI.Sprite();
-    this.setBackTexture();
+    this.turnDown();
     this.card.x = xStart;
     this.card.y = yStart;
   }
@@ -22,11 +22,11 @@ export class Card {
     this.card.y += newPointY;
   }
 
-  setBackTexture() {
+  turnDown() {
     this.card.texture = this.backTexture;
   }
 
-  setFrontTexture() {
+  turnUp() {
     this.card.texture = this.frontTexture;
   }
 
