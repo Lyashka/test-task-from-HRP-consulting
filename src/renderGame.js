@@ -88,9 +88,11 @@ export class Game {
 
       this.app.ticker.add(() => {
         let distanceToDestination = destinationBySuit - newCard.getCard().x;
-        (newCard.getCard().x < destinationBySuit && distanceToDestination > CARD_MOVE_SPEED) ?
-          newCard.moveByX(CARD_MOVE_SPEED) :
+        if (newCard.getCard().x < destinationBySuit && distanceToDestination > CARD_MOVE_SPEED) {
+          newCard.moveByX(CARD_MOVE_SPEED);
+        } else {
           newCard.moveByX(distanceToDestination);
+        }
 
         setTimeout(() => newCard.turnUp(), 1000);
       });
