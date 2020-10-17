@@ -97,7 +97,7 @@ export class Game {
 
       this.app.stage.addChild(newCard.getCard());
       if (this.currentCardsArray.length === 0) {
-        this.deck.hidden();
+        this.deck.hide();
       }
     })
 

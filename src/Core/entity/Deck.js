@@ -21,7 +21,7 @@ export class Deck {
     return this.backTexture;
   }
 
-  hidden() {
+  hide() {
     this.deck.visible = false;
   }
 }
