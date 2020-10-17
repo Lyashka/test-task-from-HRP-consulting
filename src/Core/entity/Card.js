@@ -1,11 +1,11 @@
 import * as PIXI from 'pixi.js';
 
 export class Card {
-  constructor({ resources, randomCard, width, height, backTexture, xStart, yStart }) {
+  constructor({ resources, cardData, width, height, backTexture, xStart, yStart }) {
     this.backTexture = backTexture;
 
     this.frontTexture = new PIXI.Texture(resources.cards.texture);
-    this.frontFrame = new PIXI.Rectangle(randomCard.xStart, randomCard.yStart, width, height);
+    this.frontFrame = new PIXI.Rectangle(cardData.spriteXStart, cardData.spriteYStart, width, height);
     this.frontTexture.frame = this.frontFrame;
 
     this.sprite = new PIXI.Sprite();

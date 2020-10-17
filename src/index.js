@@ -1,3 +1,3 @@
 import { Game } from "./renderGame.js";
 
-window.onload = new Game();
+const game = new Game();

@@ -30,7 +30,6 @@ export class Game {
     this.heightApp = this.app.screen.height;
     this.deck = null;
     this.backTexture = null;
-    this.randomCard = null;
     this.currentCardsArray = cloneDeep(CARDS_ARRAY);
     this.app.loader
       .add("cards", pathToSpriteCards)
@@ -65,18 +64,18 @@ export class Game {
 
     this.app.stage.addChild(this.deck.getSprite());
 
-    this.addGameAnimation(resources);
+    this.startGameLoop(resources);
   }
 
-  addGameAnimation(resources) {
+  startGameLoop(resources) {
     this.deck.getSprite().on('pointertap', () => {
       const randomIndex = getRandomInt(0, this.currentCardsArray.length - 1);
-      this.randomCard = this.currentCardsArray[randomIndex];
+      const randomCardData = this.currentCardsArray[randomIndex];
       this.currentCardsArray = this.currentCardsArray.filter((card, index) => index !== randomIndex);
 
       const newCard = new Card({
         resources: resources,
-        randomCard: this.randomCard,
+        cardData: randomCardData,
         width: CARD_WIDTH,
         height: CARD_HEIGHT,
         backTexture: this.deck.getTexture(),
@@ -84,7 +83,7 @@ export class Game {
         yStart: this.heightApp / 3,
       },);
 
-      const destinationBySuit = getDestinationBySuit(this.randomCard.suit);
+      const destinationBySuit = getDestinationBySuit(randomCardData.suit);
 
       this.app.ticker.add(() => {
         const distanceToDestination = destinationBySuit - newCard.getSprite().x;
