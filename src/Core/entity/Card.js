@@ -8,29 +8,29 @@ export class Card {
     this.frontFrame = new PIXI.Rectangle(randomCard.xStart, randomCard.yStart, width, height);
     this.frontTexture.frame = this.frontFrame;
 
-    this.card = new PIXI.Sprite();
+    this.sprite = new PIXI.Sprite();
     this.turnDown();
-    this.card.x = xStart;
-    this.card.y = yStart;
+    this.sprite.x = xStart;
+    this.sprite.y = yStart;
   }
 
   moveByX(newPointX) {
-    this.card.x += newPointX;
+    this.sprite.x += newPointX;
   }
 
   moveByY(newPointY) {
-    this.card.y += newPointY;
+    this.sprite.y += newPointY;
   }
 
   turnDown() {
-    this.card.texture = this.backTexture;
+    this.sprite.texture = this.backTexture;
   }
 
   turnUp() {
-    this.card.texture = this.frontTexture;
+    this.sprite.texture = this.frontTexture;
   }
 
-  getCard() {
-    return this.card;
+  getSprite() {
+    return this.sprite;
   }
 }

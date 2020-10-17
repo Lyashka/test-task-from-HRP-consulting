@@ -63,13 +63,13 @@ export class Game {
       yStartDeck: this.heightApp / 3,
     });
 
-    this.app.stage.addChild(this.deck.getDeck());
+    this.app.stage.addChild(this.deck.getSprite());
 
     this.addGameAnimation(resources);
   }
 
   addGameAnimation(resources) {
-    this.deck.getDeck().on('pointertap', () => {
+    this.deck.getSprite().on('pointertap', () => {
       const randomIndex = getRandomInt(0, this.currentCardsArray.length - 1);
       this.randomCard = this.currentCardsArray[randomIndex];
       this.currentCardsArray = this.currentCardsArray.filter((card, index) => index !== randomIndex);
@@ -87,8 +87,8 @@ export class Game {
       const destinationBySuit = getDestinationBySuit(this.randomCard.suit);
 
       this.app.ticker.add(() => {
-        let distanceToDestination = destinationBySuit - newCard.getCard().x;
-        if (newCard.getCard().x < destinationBySuit && distanceToDestination > CARD_MOVE_SPEED) {
+        let distanceToDestination = destinationBySuit - newCard.getSprite().x;
+        if (newCard.getSprite().x < destinationBySuit && distanceToDestination > CARD_MOVE_SPEED) {
           newCard.moveByX(CARD_MOVE_SPEED);
         } else {
           newCard.moveByX(distanceToDestination);
@@ -97,7 +97,7 @@ export class Game {
         setTimeout(() => newCard.turnUp(), 1000);
       });
 
-      this.app.stage.addChild(newCard.getCard());
+      this.app.stage.addChild(newCard.getSprite());
       if (this.currentCardsArray.length === 0) {
         this.deck.hide();
       }

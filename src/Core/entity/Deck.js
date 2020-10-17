@@ -6,15 +6,15 @@ export class Deck {
     this.backFrame = new PIXI.Rectangle(xStartFrame, yStartFrame, widthFrame, heightFrame);
     this.backTexture.frame = this.backFrame;
 
-    this.deck = new PIXI.Sprite(this.backTexture);
-    this.deck.x = xStartDeck;
-    this.deck.y = yStartDeck;
-    this.deck.interactive = true;
-    this.deck.buttonMode = true;
+    this.sprite = new PIXI.Sprite(this.backTexture);
+    this.sprite.x = xStartDeck;
+    this.sprite.y = yStartDeck;
+    this.sprite.interactive = true;
+    this.sprite.buttonMode = true;
   }
 
-  getDeck() {
-    return this.deck;
+  getSprite() {
+    return this.sprite;
   }
 
   getTexture() {
@@ -22,6 +22,6 @@ export class Deck {
   }
 
   hide() {
-    this.deck.visible = false;
+    this.sprite.visible = false;
   }
 }
