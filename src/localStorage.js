@@ -2,29 +2,35 @@ export const BACKGROUND_COLOR = 0x00B060;
 
 export const CARD_WIDTH = 82;
 export const CARD_HEIGHT = 118;
-
 export const CARD_MOVE_SPEED = 4;
 
-const SUIT_AREAS_WIDTH = 94;
-const SUIT_AREAS_HEIGHT = 130;
+export const X_START_BACK_OF_CARD = 0;
+export const Y_START_BACK_OF_CARD = 469;
+
+export const SUIT_AREAS_WIDTH = 94;
+export const SUIT_AREAS_HEIGHT = 130;
 export const SUIT_AREAS_LINE_COLOR = 0xFFFFFF;
 export const SUIT_AREAS = [
   {
+    suit: 'hearts',
     xStart: 600,
     width: SUIT_AREAS_WIDTH,
     height: SUIT_AREAS_HEIGHT,
   },
   {
+    suit: "clubs",
     xStart: 750,
     width: SUIT_AREAS_WIDTH,
     height: SUIT_AREAS_HEIGHT,
   },
   {
+    suit: "diamonds",
     xStart: 900,
     width: SUIT_AREAS_WIDTH,
     height: SUIT_AREAS_HEIGHT,
   },
   {
+    suit: "spades",
     xStart: 1050,
     width: SUIT_AREAS_WIDTH,
     height: SUIT_AREAS_HEIGHT,

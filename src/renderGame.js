@@ -13,7 +13,10 @@ import {
   CARD_HEIGHT,
   SUIT_AREAS,
   SUIT_AREAS_LINE_COLOR,
+  SUIT_AREAS_WIDTH,
   CARD_MOVE_SPEED,
+  X_START_BACK_OF_CARD,
+  Y_START_BACK_OF_CARD,
 } from './localStorage.js';
 
 export class Game {
@@ -43,15 +46,19 @@ export class Game {
     const suitsAreas = new PIXI.Graphics();
     suitsAreas.lineStyle(2, SUIT_AREAS_LINE_COLOR, 1);
     SUIT_AREAS.map(item =>
-      suitsAreas.drawRect(item.xStart, this.heightApp / 3 - 6, item.width, item.height));
+      suitsAreas.drawRect(
+        item.xStart,
+        this.heightApp / 3 - ((SUIT_AREAS_WIDTH - CARD_WIDTH) / 2),
+        item.width,
+        item.height));
     this.app.stage.addChild(suitsAreas);
 
     this.deck = new Deck({
       resources: resources,
       widthFrame: CARD_WIDTH,
       heightFrame: CARD_HEIGHT,
-      xStartFrame: 0,
-      yStartFrame: 469,
+      xStartFrame: X_START_BACK_OF_CARD,
+      yStartFrame: Y_START_BACK_OF_CARD,
       xStartDeck: this.widthApp / 4,
       yStartDeck: this.heightApp / 3,
     });

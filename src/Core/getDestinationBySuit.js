@@ -1,19 +1,13 @@
+import {
+  CARD_WIDTH,
+  SUIT_AREAS_WIDTH,
+  SUIT_AREAS,
+} from '../localStorage.js';
+
 export function getDestinationBySuit(suit) {
-  let destination = null;
-  switch (true) {
-    case suit === "hearts":
-      destination = 606;
-      break;
-    case suit === "clubs":
-      destination = 756;
-      break;
-    case suit === "diamonds":
-      destination = 906;
-      break;
-    case suit === "spades":
-      destination = 1056;
-      break;
-  }
+  const currentSuit = SUIT_AREAS.find(area => area.suit === suit);
+  const destination = ((SUIT_AREAS_WIDTH - CARD_WIDTH) / 2) +
+    currentSuit.xStart;
 
   return destination;
 }
